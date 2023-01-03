@@ -4,7 +4,7 @@
 	let isPromptActive = false;
 </script>
 
-<div class="w-full shadow-lg">
+<div class="w-[100vw] sticky top-0 shadow-lg">
 	<nav class="text-white flex flex-col w-4/5 justify-between m-auto py-6 sm:flex-row">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<a href="./">

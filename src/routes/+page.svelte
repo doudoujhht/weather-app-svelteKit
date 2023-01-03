@@ -6,7 +6,7 @@
 	let resArray: any[] = [];
 	async function handleInput() {
 		let res = await axios(
-			`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxAPIKey}`
+			`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxAPIKey}&types=place`
 		);
 		resArray = res.data.features;
 		console.log(resArray);
@@ -23,8 +23,13 @@ focus:outline-none focus:border-b-weather-secondary pt-6 text-xl pb-2"
 />
 <div class="bg-weather-secondary w-4/5 m-auto mt-3 text-white">
 	{#each resArray as city}
-		<p class="py-2 px-1 cursor-pointer border-b-2 border-b-weather-primary" transition:scale>
-			{city.place_name}
-		</p>
+		<a href="/{city.geometry.coordinates[1].toFixed(2)},{city.geometry.coordinates[0].toFixed(2)}">
+			<p class="py-2 px-1 cursor-pointer border-b-2 border-b-weather-primary" transition:scale>
+				{city.place_name}
+			</p>
+		</a>
 	{/each}
+	{#if value && resArray.length == 0}
+		<p>no place match your request please enter a different request</p>
+	{/if}
 </div>
